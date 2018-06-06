@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/iniciar_sesion"
+        android:textSize="25sp"
+        android:layout_margin="8dp"
+        android:textColor="#000"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/usuario"
+        android:layout_margin="4dp"
+        android:textSize="20sp"
+        android:textColor="#000"
+        />
+    <EditText
+        android:id="@+id/inicio_usuario"
+        android:layout_width="150dp"
+        android:layout_height="35dp"
+        android:layout_margin="8dp"
+
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/contrase_a"
+        android:layout_margin="4dp"
+        android:textSize="20sp"
+        android:textColor="#000" />
+
+    <EditText
+        android:id="@+id/inicio_contraseña"
+        android:layout_width="150dp"
+        android:layout_height="35dp"
+        android:layout_margin="8dp"
+        />
+
+
+
+
+</LinearLayout>
