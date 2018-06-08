@@ -39,16 +39,16 @@ public class MainActivity extends AppCompatActivity {
 
                 if (id==R.id.menu_noticias_generales){
                     FramentoNoticiasGenerales fragmento = new FramentoNoticiasGenerales();
-                    setFragment(fragmento);
+                    setFragmento(fragmento);
                 }
                 if (id==R.id.menu_favoritos){
                     //iniciar favoritos
                 }
                 if (id==R.id.menu_ajustes){
-                    //iniciar ajustes
+                    setFragmento(new FragmentoAjustes());
                 }
                 if (id==R.id.menu_juegos){
-                    //iniciar juegos
+                    setFragmento(new FragmentoJuegos());
                 }
                 DrawerLayout drawerLayout1 = findViewById(R.id.main_drawer);
                 drawerLayout1.closeDrawer(GravityCompat.START);
@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void setFragment(Fragment fragment){
+    private void setFragmento(Fragment fragment){
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.main_frame,fragment);

@@ -32,6 +32,6 @@ public class FragmentoAjustes extends Fragment {
         //Aqui va a ir transaccion a la nueva info
 
 
-        return super.onCreateView(inflater, container, savedInstanceState);
+        return view;
     }
 }
