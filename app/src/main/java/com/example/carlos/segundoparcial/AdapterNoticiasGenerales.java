@@ -18,6 +18,10 @@ public class AdapterNoticiasGenerales extends RecyclerView.Adapter<AdapterNotici
     Context context;
     List<Noticias> noticias;
 
+    public AdapterNoticiasGenerales(Context context) {
+        this.context = context;
+    }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
