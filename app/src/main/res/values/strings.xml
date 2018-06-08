@@ -6,4 +6,6 @@
     <string name="noticias_generales">Noticias Generales</string>
     <string name="ajustes">Ajustes</string>
     <string name="favoritos">Favoritos</string>
+    <string name="openDrawer">Open Drawer</string>
+    <string name="closeDrawer">Close Drawer</string>
 </resources>
