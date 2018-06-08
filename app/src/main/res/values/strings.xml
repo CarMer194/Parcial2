@@ -8,4 +8,6 @@
     <string name="favoritos">Favoritos</string>
     <string name="openDrawer">Open navigation Drawer</string>
     <string name="closeDrawer">Close navigation Drawer</string>
+    <string name="guardar">Guardar</string>
+    <string name="nueva_contrase_a">Nueva Contraseña</string>
 </resources>
