@@ -12,7 +12,7 @@ public class Noticias {
     @NonNull
     @PrimaryKey
     @ColumnInfo(name = "id_noticia")
-    private int id;
+    private String id;
 
      @ColumnInfo(name = "titulo_noticia")
     private String titulo;
@@ -32,4 +32,61 @@ public class Noticias {
      @ColumnInfo(name = "juego_noticia")
     private String juego;
 
+
+    @NonNull
+    public String getId() {
+        return id;
+    }
+
+    public void setId(@NonNull String id) {
+        this.id = id;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
+
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
+    }
+
+    public String getResumen() {
+        return resumen;
+    }
+
+    public void setResumen(String resumen) {
+        this.resumen = resumen;
+    }
+
+    public String getContenido() {
+        return contenido;
+    }
+
+    public void setContenido(String contenido) {
+        this.contenido = contenido;
+    }
+
+    public String getJuego() {
+        return juego;
+    }
+
+    public void setJuego(String juego) {
+        this.juego = juego;
+    }
 }
