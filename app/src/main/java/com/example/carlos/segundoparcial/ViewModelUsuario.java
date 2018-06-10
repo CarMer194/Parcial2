@@ -37,7 +37,7 @@ public class ViewModelUsuario extends AndroidViewModel {
         token = repositorioDatos.login(usuario,contraseña);
     }
 
-    public List<Noticias> getNoticiasList(String token){
+    public LiveData<List<Noticias>> getNoticiasList(String token){
         return repositorioDatos.getNoticias(token);
     }
 

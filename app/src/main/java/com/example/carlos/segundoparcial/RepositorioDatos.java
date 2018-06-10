@@ -16,6 +16,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.io.IOException;
+import java.sql.SQLOutput;
 import java.util.List;
 
 import io.reactivex.disposables.CompositeDisposable;
@@ -91,25 +92,31 @@ public class RepositorioDatos {
         return token;
     }
 
-    public List<Noticias> getNoticias(String token) {
+    public LiveData<List<Noticias>> getNoticias(String token) {
         Call<List<Noticias>> call = apiComu.getNoticias("Bearer "+token);
+        final MutableLiveData<List<Noticias>> mutableLiveData = new MutableLiveData<>();
+        System.out.println("ESTE ES EL TOKEN EN GET NOTICIAS: "+token);
         call.enqueue(new Callback<List<Noticias>>() {
             @Override
             public void onResponse(Call<List<Noticias>> call, retrofit2.Response<List<Noticias>> response) {
                 if (response.isSuccessful()){
-                    noticiasList = response.body();
+                    System.out.println("por aqui entro");
+                    mutableLiveData.setValue(response.body());
+                    noticias = mutableLiveData;
                 }
                 else{
+                    System.out.println("NO RESPONDIO");
                     Log.d("Noticias", "nel");
                 }
             }
 
             @Override
             public void onFailure(Call<List<Noticias>> call, Throwable t) {
+                System.out.println("FALLO LA COMU");
                 Log.d("Noticias","fail :(");
             }
         });
 
-        return noticiasList;
+        return mutableLiveData;
     }
 }

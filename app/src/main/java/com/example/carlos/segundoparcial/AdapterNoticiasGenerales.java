@@ -22,6 +22,11 @@ public class AdapterNoticiasGenerales extends RecyclerView.Adapter<AdapterNotici
         this.context = context;
     }
 
+    public AdapterNoticiasGenerales(Context context, List<Noticias> noticias) {
+        this.context = context;
+        this.noticias = noticias;
+    }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

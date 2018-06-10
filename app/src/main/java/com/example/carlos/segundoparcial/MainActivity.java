@@ -28,13 +28,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         SharedPreferences sharedPreferences = getPreferences(Context.MODE_PRIVATE);
-        String token = sharedPreferences.getString("TOKEN","");
+        token = sharedPreferences.getString("TOKEN","");
         if (token.equals("")){
             Log.d("Inicio","No token");
             Intent intent = new Intent(this, ActividadLogin.class);
             startActivityForResult(intent,1);
         }
         Log.d("Inicio","paso del token");
+        System.out.println("ESTE ES EL TOKEN: "+token);
         Toolbar toolbar = findViewById(R.id.main_toolbar);
         setSupportActionBar(toolbar);
         DrawerLayout drawerLayout = findViewById(R.id.main_drawer);
@@ -50,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
 
                 if (id==R.id.menu_noticias_generales){
                     FramentoNoticiasGenerales fragmento = new FramentoNoticiasGenerales();
+                    System.out.println("ESTE ES EL TOKEN: "+token);
+                    fragmento.setToken(token);
                     setFragmento(fragmento);
                 }
                 if (id==R.id.menu_favoritos){
