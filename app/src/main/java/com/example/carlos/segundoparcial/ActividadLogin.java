@@ -38,7 +38,7 @@ public class ActividadLogin extends AppCompatActivity {
                         editor.putString("TOKEN",s);
                         editor.commit();
                         Intent intent = new Intent();
-                        intent.putExtra("token",s);
+                        intent.putExtra("TOKEN",s);
                         setResult(1,intent);
                         finish();
                     }
