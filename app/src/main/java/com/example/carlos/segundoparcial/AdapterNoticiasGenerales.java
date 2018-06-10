@@ -65,4 +65,9 @@ public class AdapterNoticiasGenerales extends RecyclerView.Adapter<AdapterNotici
 
         }
     }
+
+    public void setList(List<Noticias> noticias){
+        this.noticias = noticias;
+        notifyDataSetChanged();
+    }
 }

@@ -36,16 +36,16 @@ public class FramentoNoticiasGenerales extends android.support.v4.app.Fragment {
                 return (position % 3 == 0 ? 2 : 1);
             }
         });
-
+        final AdapterNoticiasGenerales adapter = new AdapterNoticiasGenerales(getContext(),noticiasList);
+        recyclerView.setLayoutManager(gridLayoutManager);
+        recyclerView.setAdapter(adapter);
         viewModelUsuario.getNoticiasList(token).observe(this, new Observer<List<Noticias>>() {
             @Override
             public void onChanged(@Nullable List<Noticias> noticias) {
-                noticiasList=noticias;
+                adapter.setList(noticias);
             }
         });
-        AdapterNoticiasGenerales adapter = new AdapterNoticiasGenerales(getContext(),noticiasList);
-        recyclerView.setLayoutManager(gridLayoutManager);
-        recyclerView.setAdapter(adapter);
+        System.out.println("por aqui paso del call");
 
         return view;
     }

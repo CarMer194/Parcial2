@@ -100,7 +100,7 @@ public class RepositorioDatos {
             @Override
             public void onResponse(Call<List<Noticias>> call, retrofit2.Response<List<Noticias>> response) {
                 if (response.isSuccessful()){
-                    System.out.println("por aqui entro");
+                    System.out.println("por aqui entro al succesful");
                     mutableLiveData.setValue(response.body());
                     noticias = mutableLiveData;
                 }
@@ -114,6 +114,7 @@ public class RepositorioDatos {
             public void onFailure(Call<List<Noticias>> call, Throwable t) {
                 System.out.println("FALLO LA COMU");
                 Log.d("Noticias","fail :(");
+                System.out.println(t.getMessage());
             }
         });
 
