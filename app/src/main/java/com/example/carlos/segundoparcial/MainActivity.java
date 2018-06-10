@@ -69,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+
     }
 
     private void setFragmento(Fragment fragment){
@@ -111,4 +112,6 @@ public class MainActivity extends AppCompatActivity {
             token = data.getStringExtra("TOKEN");
         }
     }
+
+
 }
