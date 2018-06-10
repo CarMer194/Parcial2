@@ -23,7 +23,7 @@
     <EditText
         android:id="@+id/inicio_usuario"
         android:layout_width="150dp"
-        android:layout_height="35dp"
+        android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:textSize="20sp"
         />
@@ -39,9 +39,10 @@
     <EditText
         android:id="@+id/inicio_contraseña"
         android:layout_width="150dp"
-        android:layout_height="35dp"
+        android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:textSize="20sp"
+        android:inputType="textPassword"
         />
     <Button
         android:id="@+id/inicio_boton"
@@ -49,8 +50,5 @@
         android:layout_height="50dp"
         android:text="@string/iniciar_sesion"
         />
-
-
-
 
 </LinearLayout>
