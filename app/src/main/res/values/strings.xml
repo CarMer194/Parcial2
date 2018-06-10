@@ -10,4 +10,5 @@
     <string name="closeDrawer">Close navigation Drawer</string>
     <string name="guardar">Guardar</string>
     <string name="nueva_contrase_a">Nueva Contraseña</string>
+    <string name="iniciar_sesion">Iniciar Sesion</string>
 </resources>
