@@ -15,6 +15,7 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 import retrofit2.http.Url;
 
 public interface ApiComu {
@@ -31,5 +32,11 @@ public interface ApiComu {
 
     @GET("/news")
     Call<List<Noticias>> getNoticias(@Header("Authorization") String token);
+
+    @GET("/users/detail")
+    Call<Usuario> getUsuario(@Header("Authorization") String token);
+
+    /*@FormUrlEncoded
+    @GET("/users/detail")*/
 
 }

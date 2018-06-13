@@ -1,5 +1,6 @@
 package com.example.carlos.segundoparcial;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -28,6 +29,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         SharedPreferences sharedPreferences = getPreferences(Context.MODE_PRIVATE);
+
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.clear();
+        editor.apply();
+
         token = sharedPreferences.getString("TOKEN","");
         if (token.equals("")){
             Log.d("Inicio","No token");
@@ -115,8 +121,8 @@ public class MainActivity extends AppCompatActivity {
             System.out.println();
             editor.putString("TOKEN",token);
             editor.commit();
-
-
+            ViewModelUsuario viewModelUsuario = ViewModelProviders.of(this).get(ViewModelUsuario.class);
+            viewModelUsuario.setUsuario(token);
         }
     }
 

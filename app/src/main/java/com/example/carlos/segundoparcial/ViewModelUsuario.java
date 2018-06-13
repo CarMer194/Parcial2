@@ -22,12 +22,6 @@ public class ViewModelUsuario extends AndroidViewModel {
     public ViewModelUsuario(@NonNull Application application) {
         super(application);
         repositorioDatos = new RepositorioDatos(application);
-        if ( getToken() != null){
-            //NOTICIAS
-        }
-        else {
-            //noticias
-        }
     }
 
     public void setTokenUsuario() {
@@ -47,5 +41,11 @@ public class ViewModelUsuario extends AndroidViewModel {
     public LiveData<String> getToken() {
         return token;
     }
+
+    public void setUsuario(String tok){
+        repositorioDatos.setUsuarioDao(tok);
+    }
+
+
 
 }

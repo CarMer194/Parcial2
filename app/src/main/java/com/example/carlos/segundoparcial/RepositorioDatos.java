@@ -52,18 +52,6 @@ public class RepositorioDatos {
                 .registerTypeAdapter(Usuario.class, new Deserializer_Usuario())
                 .registerTypeAdapter(Token.class, new Deserializer_Token())
                 .create();
-
-        /*OkHttpClient okHttpClient = new OkHttpClient.Builder()
-                .addInterceptor(new Interceptor() {
-                    @Override
-                    public Response intercept(Chain chain) throws IOException {
-                        Request originalRequest = chain.request();
-                        Request.Builder builder = originalRequest.newBuilder().header("Authorization",
-                                Credentials.basic("00060313","00060313"));
-                        Request otraRequest = builder.build();
-                        return chain.proceed(otraRequest);
-                    }
-                }).build();*/
         Retrofit retrofit = new Retrofit.Builder().baseUrl(ApiComu.ENDPOINT)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create(gson))
@@ -122,6 +110,27 @@ public class RepositorioDatos {
     }
 
     public void setToken(String token){
+
+    }
+
+    public void setUsuarioDao(String token){
+        Call<Usuario> call = apiComu.getUsuario(token);
+        call.enqueue(new Callback<Usuario>() {
+            @Override
+            public void onResponse(Call<Usuario> call, retrofit2.Response<Usuario> response) {
+                if (response.isSuccessful()){
+                usuarioDao.insertar(response.body());}
+                else {
+                    Log.d("Usuario","fallo1");
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<Usuario> call, Throwable t) {
+                Log.d("Usuario","fallo2");
+            }
+        });
 
     }
 
