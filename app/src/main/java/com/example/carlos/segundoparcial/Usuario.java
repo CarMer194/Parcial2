@@ -22,6 +22,8 @@ public class Usuario {
     @ColumnInfo(name = "noticias_favortias_usuarios")
     private String noticiafavorita;
 
+    @ColumnInfo(name = "token")
+    private String token;
     @NonNull
     public String getId() {
         return id;
@@ -53,5 +55,13 @@ public class Usuario {
 
     public void setNoticiafavorita(String noticiafavorita) {
         this.noticiafavorita = noticiafavorita;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }

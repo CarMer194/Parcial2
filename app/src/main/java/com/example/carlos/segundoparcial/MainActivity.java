@@ -110,6 +110,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode==1 && resultCode==1){
             token = data.getStringExtra("TOKEN");
+            SharedPreferences sharedPreferences = getPreferences(Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            System.out.println();
+            editor.putString("TOKEN",token);
+            editor.commit();
+
+
         }
     }
 

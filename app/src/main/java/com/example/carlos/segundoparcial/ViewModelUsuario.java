@@ -30,6 +30,9 @@ public class ViewModelUsuario extends AndroidViewModel {
         }
     }
 
+    public void setTokenUsuario() {
+    }
+
     public void iniciarToken(String usuario, String contraseña){
         if (this.token != null){
             return;
@@ -44,4 +47,5 @@ public class ViewModelUsuario extends AndroidViewModel {
     public LiveData<String> getToken() {
         return token;
     }
+
 }

@@ -53,7 +53,7 @@ public class RepositorioDatos {
                 .registerTypeAdapter(Token.class, new Deserializer_Token())
                 .create();
 
-        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+        /*OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .addInterceptor(new Interceptor() {
                     @Override
                     public Response intercept(Chain chain) throws IOException {
@@ -63,7 +63,7 @@ public class RepositorioDatos {
                         Request otraRequest = builder.build();
                         return chain.proceed(otraRequest);
                     }
-                }).build();
+                }).build();*/
         Retrofit retrofit = new Retrofit.Builder().baseUrl(ApiComu.ENDPOINT)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create(gson))
@@ -120,4 +120,9 @@ public class RepositorioDatos {
 
         return mutableLiveData;
     }
+
+    public void setToken(String token){
+
+    }
+
 }
