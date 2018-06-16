@@ -37,7 +37,15 @@
         app:headerLayout="@layout/drawer_encabezado"
         app:menu="@menu/drawer_menu"
         android:layout_gravity="start"
-        />
+        >
+        <ExpandableListView
+            android:id="@+id/main_expandablelist"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:groupIndicator="@null"
+            android:layout_marginTop="50dp"/>
+
+    </android.support.design.widget.NavigationView>
 
 
 

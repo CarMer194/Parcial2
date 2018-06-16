@@ -20,8 +20,9 @@ public class FramentoNoticiasGenerales extends android.support.v4.app.Fragment {
     ViewModelUsuario viewModelUsuario;
     List<Noticias> noticiasList;
     String token="";
-    private boolean noticiasg=true;
+    private int noticiasg=0;
     private int categoria;
+    List<String> juegos;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
@@ -42,7 +43,7 @@ public class FramentoNoticiasGenerales extends android.support.v4.app.Fragment {
         recyclerView.setLayoutManager(gridLayoutManager);
         recyclerView.setAdapter(adapter);
 
-        if (noticiasg=true){
+        if (noticiasg==0){
             viewModelUsuario.getNoticiasList(token).observe(this, new Observer<List<Noticias>>() {
                 @Override
                 public void onChanged(@Nullable List<Noticias> noticias) {
@@ -51,6 +52,15 @@ public class FramentoNoticiasGenerales extends android.support.v4.app.Fragment {
             });
         }
         else{
+            noticiasg--;
+            for (int i=0;i<juegos.size();i++){
+                viewModelUsuario.getNoticiasJuego(token,juegos.get(i)).observe(this, new Observer<List<Noticias>>() {
+                    @Override
+                    public void onChanged(@Nullable List<Noticias> noticias) {
+                        adapter.setList(noticias);
+                    }
+                });
+            }
 
         }
 
@@ -63,11 +73,11 @@ public class FramentoNoticiasGenerales extends android.support.v4.app.Fragment {
         this.token = token;
     }
 
-    public boolean isNoticiasg() {
+    public int isNoticiasg() {
         return noticiasg;
     }
 
-    public void setNoticiasg(boolean noticiasg) {
+    public void setNoticiasg(int noticiasg) {
         this.noticiasg = noticiasg;
     }
 }
