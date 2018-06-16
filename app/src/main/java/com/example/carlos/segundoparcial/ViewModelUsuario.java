@@ -46,6 +46,7 @@ public class ViewModelUsuario extends AndroidViewModel {
         repositorioDatos.setUsuarioDao(tok);
     }
 
-
-
+    public LiveData<List<Noticias>> getNoticiasJuego() {
+        return noticias;
+    }
 }

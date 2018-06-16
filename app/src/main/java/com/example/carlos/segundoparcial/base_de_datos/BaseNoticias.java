@@ -8,7 +8,7 @@ import android.content.Context;
 import com.example.carlos.segundoparcial.Noticias;
 import com.example.carlos.segundoparcial.Usuario;
 
-@Database(entities = {Usuario.class, Noticias.class}, version = 1, exportSchema = false)
+@Database(entities = {Usuario.class, Noticias.class}, version = 2, exportSchema = false)
 public abstract class BaseNoticias extends RoomDatabase {
     public abstract UsuarioDao userDao();
     public abstract NoticiasDao noticiasDao();

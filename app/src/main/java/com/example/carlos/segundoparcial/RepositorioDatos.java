@@ -15,16 +15,9 @@ import com.example.carlos.segundoparcial.retrofits.ApiComu;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import java.io.IOException;
-import java.sql.SQLOutput;
 import java.util.List;
 
 import io.reactivex.disposables.CompositeDisposable;
-import okhttp3.Credentials;
-import okhttp3.Interceptor;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Retrofit;
@@ -134,4 +127,47 @@ public class RepositorioDatos {
 
     }
 
+    public LiveData<List<String>> getCategorias(String token){
+        final MutableLiveData<List<String>> data=new MutableLiveData<>();
+        Call<List<String>> call = apiComu.getJuegos(token);
+        call.enqueue(new Callback<List<String>>() {
+            @Override
+            public void onResponse(Call<List<String>> call, retrofit2.Response<List<String>> response) {
+                if (response.isSuccessful()){
+                    data.setValue(response.body());
+                }
+                else{
+                    Log.d("Categorias", "Fallo success");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<String>> call, Throwable t) {
+                Log.d("Categorias","onfailure");
+            }
+        });
+        return data;
+    }
+
+    public LiveData<List<Noticias>> getNoticiasJuego(String token,String juego) {
+        final MutableLiveData<List<Noticias>> data = new MutableLiveData<>();
+        Call<List<Noticias>> call = apiComu.getNoticiasJuego(token,juego);
+        call.enqueue(new Callback<List<Noticias>>() {
+            @Override
+            public void onResponse(Call<List<Noticias>> call, retrofit2.Response<List<Noticias>> response) {
+                if (response.isSuccessful()){
+                    data.setValue(response.body());
+                }
+                else{
+                    Log.d("Noticiasjuegos", "Fallo success");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Noticias>> call, Throwable t) {
+                Log.d("Nociticasjeugos","fallo");
+            }
+        });
+        return data;
+    }
 }

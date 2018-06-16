@@ -17,8 +17,11 @@ public class FragmentoJuegos extends Fragment {
         View view = inflater.inflate(R.layout.fragmento_viewpager_juegos,container,false);
 
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getFragmentManager());
-
         ViewPager viewPager = view.findViewById(R.id.fragmento_juegos_viewpager);
+
+        FramentoNoticiasGenerales fragmento= new FramentoNoticiasGenerales();
+
+
         viewPager.setAdapter(viewPagerAdapter);
         TabLayout tabLayout = view.findViewById(R.id.fragmento_juegos_tablayout);
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
