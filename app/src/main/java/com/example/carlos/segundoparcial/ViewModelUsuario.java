@@ -46,7 +46,11 @@ public class ViewModelUsuario extends AndroidViewModel {
         repositorioDatos.setUsuarioDao(tok);
     }
 
-    public LiveData<List<Noticias>> getNoticiasJuego() {
-        return noticias;
+    public LiveData<List<Noticias>> getNoticiasJuego(String token,String juego) {
+        return repositorioDatos.getNoticiasJuego(token,juego);
+    }
+
+    public LiveData<List<String>> getCategorias(String token) {
+        return repositorioDatos.getCategorias(token);
     }
 }
