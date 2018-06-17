@@ -6,11 +6,13 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/menu_noticias_generales"
-            android:title="@string/noticias_generales" />
+            android:title="@string/noticias_generales"
+            />
 
         <item
             android:id="@+id/menu_juegos"
-            android:title="Juegos" />
+            android:title="Juegos"
+            android:icon="@drawable/ic_menu_white_24dp"/>
 
     </group>
 
@@ -18,11 +20,13 @@
         <menu>
             <item
                 android:id="@+id/menu_ajustes"
-                android:title="@string/ajustes" />
+                android:title="@string/ajustes"
+                />
 
             <item
                 android:id="@+id/menu_favoritos"
-                android:title="@string/favoritos" />
+                android:title="@string/favoritos"
+                />
         </menu>
 
     </item>

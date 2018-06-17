@@ -20,6 +20,9 @@ public class FramentoNoticiasGenerales extends android.support.v4.app.Fragment {
     ViewModelUsuario viewModelUsuario;
     List<Noticias> noticiasList;
     String token="";
+    private int noticiasg=0;
+    private int categoria;
+    String[] juegos;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
@@ -39,18 +42,46 @@ public class FramentoNoticiasGenerales extends android.support.v4.app.Fragment {
         final AdapterNoticiasGenerales adapter = new AdapterNoticiasGenerales(getContext(),noticiasList);
         recyclerView.setLayoutManager(gridLayoutManager);
         recyclerView.setAdapter(adapter);
-        viewModelUsuario.getNoticiasList(token).observe(this, new Observer<List<Noticias>>() {
-            @Override
-            public void onChanged(@Nullable List<Noticias> noticias) {
-                adapter.setList(noticias);
+
+        if (noticiasg==0){
+            viewModelUsuario.getNoticiasList(token).observe(this, new Observer<List<Noticias>>() {
+                @Override
+                public void onChanged(@Nullable List<Noticias> noticias) {
+                    adapter.setList(noticias);
+                }
+            });
+        }
+        else{
+            noticiasg--;
+            for (int i=0;i<juegos.length;i++){
+                viewModelUsuario.getNoticiasJuego(token,juegos[i]).observe(this, new Observer<List<Noticias>>() {
+                    @Override
+                    public void onChanged(@Nullable List<Noticias> noticias) {
+                        adapter.setList(noticias);
+                    }
+                });
             }
-        });
-        System.out.println("por aqui paso del call");
+
+        }
+
+        //System.out.println("por aqui paso del call");
 
         return view;
     }
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public int isNoticiasg() {
+        return noticiasg;
+    }
+
+    public void setNoticiasg(int noticiasg) {
+        this.noticiasg = noticiasg;
+    }
+
+    public void setJuegos(String[] juegos) {
+        this.juegos = juegos;
     }
 }

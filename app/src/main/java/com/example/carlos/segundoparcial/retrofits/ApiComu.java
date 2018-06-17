@@ -36,7 +36,10 @@ public interface ApiComu {
     @GET("/users/detail")
     Call<Usuario> getUsuario(@Header("Authorization") String token);
 
-    /*@FormUrlEncoded
-    @GET("/users/detail")*/
+    @GET("/news/type/list")
+    Call<String[]> getJuegos(@Header("Authorization") String token);
+
+    @GET("/news/type/{game}")
+    Call<List<Noticias>> getNoticiasJuego(@Header("Authorization") String token, @Path("game")String juego);
 
 }

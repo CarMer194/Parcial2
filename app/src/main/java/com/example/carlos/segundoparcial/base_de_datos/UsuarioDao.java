@@ -20,4 +20,7 @@ public interface UsuarioDao {
     @Delete
     void eliminar(Usuario usuario);
 
+    @Query("DELETE FROM tabla_usuario")
+    void deleteAll();
+
 }

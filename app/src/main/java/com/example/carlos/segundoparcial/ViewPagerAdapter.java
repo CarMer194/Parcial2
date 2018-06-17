@@ -38,4 +38,6 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
         this.titulo.add(titulo);
         fragments.add(fragment);
     }
+
+
 }
