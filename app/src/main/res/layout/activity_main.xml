@@ -35,7 +35,6 @@
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/drawer_encabezado"
-        app:menu="@menu/drawer_menu"
         android:layout_gravity="start"
         >
         <ExpandableListView
@@ -43,7 +42,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:groupIndicator="@null"
-            android:layout_marginTop="50dp"/>
+            android:layout_marginTop="190dp"
+           />
 
     </android.support.design.widget.NavigationView>
 

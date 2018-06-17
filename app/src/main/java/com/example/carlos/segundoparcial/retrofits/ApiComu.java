@@ -37,7 +37,7 @@ public interface ApiComu {
     Call<Usuario> getUsuario(@Header("Authorization") String token);
 
     @GET("/news/type/list")
-    Call<List<String>> getJuegos(@Header("Authorization") String token);
+    Call<String[]> getJuegos(@Header("Authorization") String token);
 
     @GET("/news/type/{game}")
     Call<List<Noticias>> getNoticiasJuego(@Header("Authorization") String token, @Path("game")String juego);

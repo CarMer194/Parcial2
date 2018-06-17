@@ -22,7 +22,7 @@ public class FramentoNoticiasGenerales extends android.support.v4.app.Fragment {
     String token="";
     private int noticiasg=0;
     private int categoria;
-    List<String> juegos;
+    String[] juegos;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
@@ -53,8 +53,8 @@ public class FramentoNoticiasGenerales extends android.support.v4.app.Fragment {
         }
         else{
             noticiasg--;
-            for (int i=0;i<juegos.size();i++){
-                viewModelUsuario.getNoticiasJuego(token,juegos.get(i)).observe(this, new Observer<List<Noticias>>() {
+            for (int i=0;i<juegos.length;i++){
+                viewModelUsuario.getNoticiasJuego(token,juegos[i]).observe(this, new Observer<List<Noticias>>() {
                     @Override
                     public void onChanged(@Nullable List<Noticias> noticias) {
                         adapter.setList(noticias);
@@ -79,5 +79,9 @@ public class FramentoNoticiasGenerales extends android.support.v4.app.Fragment {
 
     public void setNoticiasg(int noticiasg) {
         this.noticiasg = noticiasg;
+    }
+
+    public void setJuegos(String[] juegos) {
+        this.juegos = juegos;
     }
 }

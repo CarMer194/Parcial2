@@ -50,7 +50,7 @@ public class ViewModelUsuario extends AndroidViewModel {
         return repositorioDatos.getNoticiasJuego(token,juego);
     }
 
-    public LiveData<List<String>> getCategorias(String token) {
+    public LiveData<String[]> getCategorias(String token) {
         return repositorioDatos.getCategorias(token);
     }
 }

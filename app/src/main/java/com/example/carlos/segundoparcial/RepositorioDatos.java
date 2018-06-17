@@ -20,6 +20,7 @@ import java.util.List;
 import io.reactivex.disposables.CompositeDisposable;
 import retrofit2.Call;
 import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -127,25 +128,24 @@ public class RepositorioDatos {
 
     }
 
-    public LiveData<List<String>> getCategorias(String token){
+    public LiveData<String[]> getCategorias(String token){
         //Log.d("TOKEN GET categorias",token);
-        final MutableLiveData<List<String>> data=new MutableLiveData<>();
-        Call<List<String>> call = apiComu.getJuegos("Bearer "+token);
-        call.enqueue(new Callback<List<String>>() {
+        final MutableLiveData<String[]> data= new MutableLiveData<>();
+        Call<String[]> call = apiComu.getJuegos("Bearer "+token);
+        call.enqueue(new Callback<String[]>() {
             @Override
-            public void onResponse(Call<List<String>> call, retrofit2.Response<List<String>> response) {
+            public void onResponse(Call<String[]> call, Response<String[]> response) {
                 if (response.isSuccessful()){
                     data.setValue(response.body());
-                }
-                else{
-
-                    Log.d("Categorias", "Fallo success");
+                }else{
+                    Log.d("Categorias","Fallo en successful");
                 }
             }
 
             @Override
-            public void onFailure(Call<List<String>> call, Throwable t) {
-                Log.d("Categorias","onfailure");
+            public void onFailure(Call<String[]> call, Throwable t) {
+                Log.d("Categorias","Fallo onFailure");
+
             }
         });
         return data;
