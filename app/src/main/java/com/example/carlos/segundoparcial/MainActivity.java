@@ -30,9 +30,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         SharedPreferences sharedPreferences = getPreferences(Context.MODE_PRIVATE);
 
-        SharedPreferences.Editor editor = sharedPreferences.edit();
+        /*SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.clear();
-        editor.apply();
+        editor.apply();*/
 
         token = sharedPreferences.getString("TOKEN","");
         if (token.equals("")){
