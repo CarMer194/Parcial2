@@ -18,6 +18,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.telecom.Call;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -25,11 +26,16 @@ import android.view.View;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 
+import com.example.carlos.segundoparcial.retrofits.ApiComu;
+
 import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -41,33 +47,44 @@ public class MainActivity extends AppCompatActivity {
     HashMap<ExpandedMenuModel, List<String>> listDataChild;
     AppCompatActivity appCompatActivity = this;
     boolean fragchange=false;
+    ActualizarToken actualizarToken = new ActualizarToken();
 
     public class ActualizarToken extends Thread{
-        Fragment fragment;
-
-        public ActualizarToken(Fragment fragment, AppCompatActivity appCompatActivity) {
-            this.fragment = fragment;
-        }
-
+        ApiComu apiComu;
         @Override
         public synchronized void start() {
             super.start();
-            while(true){
-                ViewModelUsuario viewModelUsuario = ViewModelProviders.of(fragment).get(ViewModelUsuario.class);
-                try {
-                    Thread.sleep(600000);
-                    viewModelUsuario.getToken().observe(appCompatActivity, new Observer<String>() {
-                        @Override
-                        public void onChanged(@Nullable String s) {
-                            if (s.equals(token)){
-                                token =s;
+            while (true){
+
+                retrofit2.Call<Token> call = apiComu.iniciarSesion(algo1,algo2);
+                call.enqueue(new Callback<Token>() {
+                    @Override
+                    public void onResponse(retrofit2.Call<Token> call, Response<Token> response) {
+                        if (response.isSuccessful()){
+                            if (response.body().getToken().equals(token)){
+                                token=response.body().getToken();
+                                Log.d("Actulizador","TOKEN actualizador: "+token);
+                            }
+                            else{
+                                Log.d("Actualizador","Repetido");
                             }
                         }
-                    });
+                        else{
+                            Log.d("Actualizador","fallo reponse");
+                        }
+                    }
 
+                    @Override
+                    public void onFailure(retrofit2.Call<Token> call, Throwable t) {
+                        Log.d("Actualizador","fallo onFailure");
+                    }
+                });
+                try {
+                    Thread.sleep(600000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+
             }
 
         }
@@ -111,7 +128,6 @@ public class MainActivity extends AppCompatActivity {
         drawerToggle.syncState();
 
         FramentoNoticiasGenerales noticiasGenerales = new FramentoNoticiasGenerales();
-        ActualizarToken actualizarToken=new ActualizarToken();
 
         NavigationView navigationView = findViewById(R.id.main_navigation);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -230,7 +246,7 @@ public class MainActivity extends AppCompatActivity {
             viewModelUsuario.setUsuario(token);
             setlistaDeJuegos();
             fragchange=true;
-
+            actualizarToken.start();
         }
     }
 
