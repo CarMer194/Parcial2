@@ -78,7 +78,6 @@ public class ExpandableAdapter extends BaseExpandableListAdapter {
         TextView lblListHeader = (TextView) convertView
                 .findViewById(R.id.submenu);
         ImageView headerIcon = (ImageView) convertView.findViewById(R.id.iconimage);
-        //lblListHeader.setTypeface(null, Typeface.BOLD);
         if(groupPosition == 0){
 
         }
@@ -116,6 +115,6 @@ public class ExpandableAdapter extends BaseExpandableListAdapter {
 
     @Override
     public boolean isChildSelectable(int groupPosition, int childPosition) {
-        return false;
+        return true;
     }
 }

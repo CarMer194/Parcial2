@@ -84,23 +84,6 @@ public class MainActivity extends AppCompatActivity {
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                /*int id= item.getItemId();
-
-                if (id==R.id.menu_noticias_generales){
-                    FramentoNoticiasGenerales fragmento = new FramentoNoticiasGenerales();
-                    System.out.println("ESTE ES EL TOKEN: "+token);
-                    fragmento.setToken(token);
-                    setFragmento(fragmento);
-                }
-                if (id==R.id.menu_favoritos){
-                    //iniciar favoritos
-                }
-                if (id==R.id.menu_ajustes){
-                    setFragmento(new FragmentoAjustes());
-                }
-                if (id==R.id.menu_juegos){
-                    setFragmento(new FragmentoJuegos());
-                }*/
                 DrawerLayout drawerLayout1 = findViewById(R.id.main_drawer);
                 drawerLayout1.closeDrawer(GravityCompat.START);
                 return true;
@@ -116,6 +99,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
                 Log.d("CHILD CLICK","clic en: "+childPosition);
+                Log.d("GROUP CLICK child", "clic en: "+childPosition);
 
                 setNoticiasGenerales(childPosition+1);
 

@@ -153,7 +153,7 @@ public class RepositorioDatos {
 
     public LiveData<List<Noticias>> getNoticiasJuego(String token,String juego) {
         final MutableLiveData<List<Noticias>> data = new MutableLiveData<>();
-        Call<List<Noticias>> call = apiComu.getNoticiasJuego("Bearer" + token,juego);
+        Call<List<Noticias>> call = apiComu.getNoticiasJuego("Bearer " + token,juego);
         call.enqueue(new Callback<List<Noticias>>() {
             @Override
             public void onResponse(Call<List<Noticias>> call, retrofit2.Response<List<Noticias>> response) {

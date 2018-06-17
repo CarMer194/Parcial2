@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,7 +53,9 @@ public class FramentoNoticiasGenerales extends android.support.v4.app.Fragment {
             });
         }
         else{
+            Log.d("Noticia id","noticiasg: " +noticiasg);
             noticiasg--;
+            Log.d("Noticias catalogo","noticia del juego"+juegos[noticiasg]);
             for (int i=0;i<juegos.length;i++){
                 viewModelUsuario.getNoticiasJuego(token,juegos[i]).observe(this, new Observer<List<Noticias>>() {
                     @Override
