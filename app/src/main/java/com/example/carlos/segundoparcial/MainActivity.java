@@ -25,6 +25,7 @@ import android.view.View;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -39,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
     List<ExpandedMenuModel> listDataHeader;
     HashMap<ExpandedMenuModel, List<String>> listDataChild;
     AppCompatActivity appCompatActivity = this;
+    boolean fragchange=false;
 
 
 
@@ -74,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout.addDrawerListener(drawerToggle);
         drawerToggle.syncState();
 
+        FramentoNoticiasGenerales noticiasGenerales = new FramentoNoticiasGenerales();
         NavigationView navigationView = findViewById(R.id.main_navigation);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -110,6 +113,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
                 Log.d("ExpandableList","clic en: "+childPosition);
+
+                setNoticiasGenerales();
+
                 DrawerLayout drawerLayout1 = findViewById(R.id.main_drawer);
                 drawerLayout1.closeDrawer(GravityCompat.START);
                 return false;
@@ -118,6 +124,7 @@ public class MainActivity extends AppCompatActivity {
         expandableListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
             @Override
             public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
+                Log.d("GROUP CLICK ","ESTO:" + groupPosition);
                 if (id==R.id.menu_noticias_generales){
                     FramentoNoticiasGenerales fragmento = new FramentoNoticiasGenerales();
                     System.out.println("ESTE ES EL TOKEN: "+token);
@@ -173,6 +180,11 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void setNoticiasGenerales(){
+        FragmentoJuegos fragmentoJuegos = new FragmentoJuegos();
+        setFragmento(fragmentoJuegos);
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode==1 && resultCode==1){
@@ -184,7 +196,23 @@ public class MainActivity extends AppCompatActivity {
             editor.commit();
             ViewModelUsuario viewModelUsuario = ViewModelProviders.of(this).get(ViewModelUsuario.class);
             viewModelUsuario.setUsuario(token);
+            setlistaDeJuegos();
+            fragchange=true;
         }
+    }
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        if (fragchange){
+            FramentoNoticiasGenerales fragmento = new FramentoNoticiasGenerales();
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.main_frame, fragmento);
+            fragmentTransaction.commit();
+        }
+
+
     }
 
     private void setlistaDeJuegos(){
@@ -212,10 +240,16 @@ public class MainActivity extends AppCompatActivity {
         item4.setIconImg(R.drawable.ic_favorite_black_24dp);
         listDataHeader.add(item4);
 
+        System.out.println("Aqui va para el onchanged");
         ViewModelUsuario viewModelUsuario = ViewModelProviders.of(this).get(ViewModelUsuario.class);
         viewModelUsuario.getCategorias(token).observe(this, new Observer<List<String>>() {
             @Override
             public void onChanged(@Nullable List<String> strings) {
+                Log.d("Expandable Adapter", "por aqui pasa el onchange");
+            juegos=strings;
+            listDataChild.put(listDataHeader.get(1),juegos);
+
+            expandableListAdapter = new ExpandableAdapter(appCompatActivity,listDataHeader, listDataChild,expandableListView);
 
 
 

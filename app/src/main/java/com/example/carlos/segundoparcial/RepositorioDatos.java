@@ -128,8 +128,9 @@ public class RepositorioDatos {
     }
 
     public LiveData<List<String>> getCategorias(String token){
+        //Log.d("TOKEN GET categorias",token);
         final MutableLiveData<List<String>> data=new MutableLiveData<>();
-        Call<List<String>> call = apiComu.getJuegos(token);
+        Call<List<String>> call = apiComu.getJuegos("Bearer "+token);
         call.enqueue(new Callback<List<String>>() {
             @Override
             public void onResponse(Call<List<String>> call, retrofit2.Response<List<String>> response) {
@@ -137,6 +138,7 @@ public class RepositorioDatos {
                     data.setValue(response.body());
                 }
                 else{
+
                     Log.d("Categorias", "Fallo success");
                 }
             }
@@ -151,7 +153,7 @@ public class RepositorioDatos {
 
     public LiveData<List<Noticias>> getNoticiasJuego(String token,String juego) {
         final MutableLiveData<List<Noticias>> data = new MutableLiveData<>();
-        Call<List<Noticias>> call = apiComu.getNoticiasJuego(token,juego);
+        Call<List<Noticias>> call = apiComu.getNoticiasJuego("Bearer" + token,juego);
         call.enqueue(new Callback<List<Noticias>>() {
             @Override
             public void onResponse(Call<List<Noticias>> call, retrofit2.Response<List<Noticias>> response) {
