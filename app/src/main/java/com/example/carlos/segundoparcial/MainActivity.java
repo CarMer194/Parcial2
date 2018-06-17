@@ -33,7 +33,7 @@ import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity {
-    String token;
+    String token, algo1,algo2;
     String[] juegos;
     ExpandableListView expandableListView;
     ExpandableListAdapter expandableListAdapter;
@@ -42,6 +42,36 @@ public class MainActivity extends AppCompatActivity {
     AppCompatActivity appCompatActivity = this;
     boolean fragchange=false;
 
+    public class ActualizarToken extends Thread{
+        Fragment fragment;
+
+        public ActualizarToken(Fragment fragment, AppCompatActivity appCompatActivity) {
+            this.fragment = fragment;
+        }
+
+        @Override
+        public synchronized void start() {
+            super.start();
+            while(true){
+                ViewModelUsuario viewModelUsuario = ViewModelProviders.of(fragment).get(ViewModelUsuario.class);
+                try {
+                    Thread.sleep(600000);
+                    viewModelUsuario.getToken().observe(appCompatActivity, new Observer<String>() {
+                        @Override
+                        public void onChanged(@Nullable String s) {
+                            if (s.equals(token)){
+                                token =s;
+                            }
+                        }
+                    });
+
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        }
+    }
 
 
     @Override
@@ -60,6 +90,7 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(this, ActividadLogin.class);
             startActivityForResult(intent,1);
         }
+
         Log.d("Inicio","paso del token");
         System.out.println("ESTE ES EL TOKEN: "+token);
 
@@ -80,6 +111,8 @@ public class MainActivity extends AppCompatActivity {
         drawerToggle.syncState();
 
         FramentoNoticiasGenerales noticiasGenerales = new FramentoNoticiasGenerales();
+        ActualizarToken actualizarToken=new ActualizarToken();
+
         NavigationView navigationView = findViewById(R.id.main_navigation);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -186,6 +219,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode==1 && resultCode==1){
             token = data.getStringExtra("TOKEN");
+            algo1=data.getStringExtra("Use");
+            algo2=data.getStringExtra("CO");
             SharedPreferences sharedPreferences = getPreferences(Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPreferences.edit();
             System.out.println();
@@ -195,6 +230,7 @@ public class MainActivity extends AppCompatActivity {
             viewModelUsuario.setUsuario(token);
             setlistaDeJuegos();
             fragchange=true;
+
         }
     }
 

@@ -12,11 +12,21 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.carlos.segundoparcial.base_de_datos.UsuarioDao;
+
 public class ActividadLogin extends AppCompatActivity {
     Button boton;
     EditText usuario, contra;
     ViewModelUsuario viewModelUsuario;
     AppCompatActivity appCompatActivity = this;
+
+    public String getUsuario() {
+        return usuario.getText().toString();
+    }
+
+    public String getContra() {
+        return contra.getText().toString();
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -26,6 +36,7 @@ public class ActividadLogin extends AppCompatActivity {
         usuario = findViewById(R.id.inicio_usuario);
         contra =findViewById(R.id.inicio_contraseña);
         boton = findViewById(R.id.inicio_boton);
+
         boton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -39,12 +50,17 @@ public class ActividadLogin extends AppCompatActivity {
                         editor.commit();
                         Intent intent = new Intent();
                         intent.putExtra("TOKEN",s);
+                        intent.putExtra("Use",usuario.getText().toString());
+                        intent.putExtra("CO",contra.getText().toString());
                         setResult(1,intent);
                         finish();
+                        viewModelUsuario.setUsuario(s);
                     }
                 });
             }
         });
+
+
 
 
     }
